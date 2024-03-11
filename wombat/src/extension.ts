@@ -3,13 +3,25 @@
 import * as vscode from 'vscode';
 import fs from "fs";
 import path from "path";
-import { getNonce } from "getNonce";
+import { getNonce } from "./getNonce";
 import { SidebarProvider } from "./SidebarProvider";
+import { Memento } from "vscode";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
+	const storage = context.globalState;
 
+	 const json = storage.get("mydata") as string;
+	if(json !== null){
+		console.log(json)
+
+		fs.writeFile("C:\\_repos\\Botball\\Wombat-Extension\\wombat\\log\\wombat.config.json", json, { encoding: "utf-8" }, () => {
+			console.log("File wrote")
+		})
+	}
+	
+		
 	const sidebarProvider = new SidebarProvider(context.extensionUri);
 	context.subscriptions.push(
 	  vscode.window.registerWebviewViewProvider(
@@ -35,8 +47,12 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 }
 
+
+
 function getHomeSite(){
-	return fs.readFileSync("/home/prime/wombat/src/webview/wombat-config.html", "utf-8");
+	console.log(fs.readFileSync(path.resolve("C:\\_repos\\Botball\\Wombat-Extension\\wombat\\src\\webview\\wombat-config.html"), "utf-8"));
+
+	return fs.readFileSync(path.resolve("C:\\_repos\\Botball\\Wombat-Extension\\wombat\\src\\webview\\wombat-config.html"), "utf-8");
 }
 
 // This method is called when your extension is deactivated

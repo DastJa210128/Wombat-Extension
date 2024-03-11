@@ -37,10 +37,20 @@ exports.deactivate = exports.activate = void 0;
 // Import the module and reference it with the alias vscode in your code below
 const vscode = __importStar(__webpack_require__(1));
 const fs_1 = __importDefault(__webpack_require__(2));
-const SidebarProvider_1 = __webpack_require__(3);
+const path_1 = __importDefault(__webpack_require__(3));
+const SidebarProvider_1 = __webpack_require__(4);
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
-function activate(context) {
+async function activate(context) {
+    const storage = context.globalState;
+    /* const json = storage.get("data") as string;
+    if(json !== null){
+        console.log(json)
+
+        fs.writeFile("C:\\_repos\\Botball\\Wombat-Extension\\test.txt", json, { encoding: "utf-8" }, () => {
+            console.log("File wrote")
+        })
+    } */
     const sidebarProvider = new SidebarProvider_1.SidebarProvider(context.extensionUri);
     context.subscriptions.push(vscode.window.registerWebviewViewProvider("wombat-sidebar", sidebarProvider));
     context.subscriptions.push(vscode.commands.registerCommand('wombat.Upload', () => {
@@ -56,7 +66,8 @@ function activate(context) {
 }
 exports.activate = activate;
 function getHomeSite() {
-    return fs_1.default.readFileSync("/home/prime/wombat/src/webview/wombat-config.html", "utf-8");
+    console.log(fs_1.default.readFileSync(path_1.default.resolve("C:\\_repos\\Botball\\Wombat-Extension\\wombat\\src\\webview\\wombat-config.html"), "utf-8"));
+    return fs_1.default.readFileSync(path_1.default.resolve("C:\\_repos\\Botball\\Wombat-Extension\\wombat\\src\\webview\\wombat-config.html"), "utf-8");
 }
 // This method is called when your extension is deactivated
 function deactivate() { }
@@ -77,6 +88,12 @@ module.exports = require("fs");
 
 /***/ }),
 /* 3 */
+/***/ ((module) => {
+
+module.exports = require("path");
+
+/***/ }),
+/* 4 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -108,9 +125,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SidebarProvider = void 0;
-const getNonce_1 = __webpack_require__(4);
+const getNonce_1 = __webpack_require__(5);
 const vscode = __importStar(__webpack_require__(1));
 const fs_1 = __importDefault(__webpack_require__(2));
+const path_1 = __importDefault(__webpack_require__(3));
 class SidebarProvider {
     _extensionUri;
     _view;
@@ -153,15 +171,16 @@ class SidebarProvider {
         const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "out", "compiled/sidebar.js"));
         const styleMainUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "out", "compiled/sidebar.css"));
         const styleVSCodeUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "media", "vscode.css"));
-        const nonce = (0, getNonce_1.getNonce)(); // Use a nonce to only allow a specific script to be run.
-        return fs_1.default.readFileSync("/home/prime/wombat/src/webview/wombat-config.html", "utf-8");
+        const nonce = (0, getNonce_1.getNonce)(); // Use a nonce to only allow a specific script to be run.#
+        console.log(fs_1.default.readFileSync(path_1.default.resolve("C:\\_repos\\Botball\\Wombat-Extension\\wombat\\src\\webview\\wombat-config.html"), "utf-8"));
+        return fs_1.default.readFileSync(path_1.default.resolve("C:\\_repos\\Botball\\Wombat-Extension\\wombat\\src\\webview\\wombat-config.html"), "utf-8");
     }
 }
 exports.SidebarProvider = SidebarProvider;
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ ((__unused_webpack_module, exports) => {
 
 

@@ -24,7 +24,7 @@ function activate(context) {
 }
 exports.activate = activate;
 function getHomeSite() {
-    return fs_1.default.readFileSync("/home/prime/wombat/src/webview/wombat-config.html", "utf-8");
+    return fs_1.default.readFileSync(fs.readFileSync("C:\\_repos\\Botball\\Wombat-Extension\\wombat\\src\\webview\\wombat-config.html", "utf-8"), "utf-8");
 }
 // This method is called when your extension is deactivated
 function deactivate() { }

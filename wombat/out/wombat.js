@@ -96,7 +96,7 @@ class SwiperPanel {
         const stylesMainUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "media", "vscode.css"));
         const cssUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "out", "compiled/swiper.css"));
         // Use a nonce to only allow specific scripts to be run
-        return fs_1.default.readFileSync("/home/prime/wombat/src/webview/wombat-config.html", "utf-8");
+        return fs_1.default.readFileSync(fs.readFileSync(path.resolve("C:\\_repos\\Botball\\Wombat-Extension\\wombat\\src\\webview\\wombat-config.html"), "utf-8"), "utf-8");
     }
 }
 exports.SwiperPanel = SwiperPanel;

@@ -149,10 +149,17 @@
 	</form>
 
 	<script>
-		const fs = require('fs');
+		let fs = require('fs');
+		const vscode = acquireVsCodeApi();
+
+		//import { createRequire } from 'module';
+		//const require = createRequire(import.meta.url);
+		console.log(vscode);
+		
+		
 		function onSave() {
 
-			const folderName = '../../out/log';
+			const folderName = 'C:\\_repos\\Botball\\Wombat-Extension\\wombat\\src\\webview\\log\\';
 
 			try {
 				if (!fs.existsSync(folderName)) {
@@ -162,8 +169,7 @@
 				console.error(err);
 			}
 
-			const filename = "wombat.config.json";
-			const path = "/home/prime/wombat"
+			const path = "C:\\_repos\\Botball\\Wombat-Extension\\wombat\\src\\webview\\log\\wombat.config.json";
 			const username = document.getElementById("user").value;
 			const password = document.getElementById("passwd").value;
 			const host = document.getElementById("ip").value;
@@ -179,25 +185,28 @@
 				}
 			}
 			const json = JSON.stringify(content);
-
-
-
-			download(json, filename, "text/plain")
+			
+			localStorage.clear();
+			localStorage.setItem("mydata", json);
+			// download(json, filename, "text/plain")
 
 			// use toJSON method
-
+			
 		}
 		function onSubmit() {
 
 		}
+		
 
-		function download(content, fileName, contentType) {
+		// That would be the version where you have do search for the folder you put it in
+
+		/* function download(content, fileName, contentType) {
 			var a = document.createElement("a");
 			var file = new Blob([content], { type: contentType });
 			a.href = URL.createObjectURL(file);
 			a.download = fileName;
 			a.click();
-		}
+		} */
 	</script>
 
 </body>

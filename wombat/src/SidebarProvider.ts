@@ -1,6 +1,8 @@
 import { getNonce } from "./getNonce";
 import * as vscode from "vscode";
 import fs from "fs";
+import path from "path";
+import { Console } from "console";
 
 export class SidebarProvider implements vscode.WebviewViewProvider {
   _view?: vscode.WebviewView;
@@ -60,8 +62,10 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     );
 
 
-    const nonce = getNonce();  // Use a nonce to only allow a specific script to be run.
+    const nonce = getNonce();  // Use a nonce to only allow a specific script to be run.#
 
-    return fs.readFileSync("/home/prime/wombat/src/webview/wombat-config.html", "utf-8");
+    console.log(fs.readFileSync(path.resolve("C:\\_repos\\Botball\\Wombat-Extension\\wombat\\src\\webview\\wombat-config.html"), "utf-8"));
+
+    return fs.readFileSync(path.resolve("C:\\_repos\\Botball\\Wombat-Extension\\wombat\\src\\webview\\wombat-config.html"), "utf-8");
   }
 }
